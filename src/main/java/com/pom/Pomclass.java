@@ -28,7 +28,7 @@ public class Pomclass extends Base_class {
 
     public By Dontallowbtn = By.id("optInText");
 
-
+//hbxjcnvksx
 
 
     public By Checkout = By.xpath("//span[.='CHECKOUT']");
