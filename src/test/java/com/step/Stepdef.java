@@ -120,7 +120,7 @@ public class Stepdef extends Base_class {
         System.out.println(TaxValue);
 
 
-          double totalvalue  = Double.parseDouble("SUBTOTAL + TaxValue" );
+          double totalvalue  = Double.parseDouble(String.valueOf(SubTotal+ TaxValue));
         System.out.println("Total Value:"+totalvalue);
 
         String gtotal = driver.findElement(pom.grandTotal).getText();
