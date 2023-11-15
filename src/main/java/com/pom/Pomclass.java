@@ -1,12 +1,7 @@
 package com.pom;
 
 import com.Baseclass_of_Dominos.Base_class;
-import com.sun.org.apache.xml.internal.security.utils.XalanXPathAPI;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class Pomclass extends Base_class {
 
@@ -38,14 +33,16 @@ public class Pomclass extends Base_class {
 
     public By Checkout = By.xpath("//span[.='CHECKOUT']");
 
+    public By suggestion = By.id("(//span[@class='lst-desc-main ellipsis'])[1]");
 
 
-    public By subtotal = By.xpath("//span[@class='rupee sb-ttl']");
+    public By subtotal = By.xpath("(//span[@class='rupee'])[4]");
 
     public By Tax = By.xpath("(//span[@class='rupee'])[5]");
 
 
-    public By grandTotal = By.xpath("//span[.='Grand Total']");
+    public By grandTotal = By.xpath("(//span[@class='rupee'])[6]");
+
 
  }
 
