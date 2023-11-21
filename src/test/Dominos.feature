@@ -9,7 +9,9 @@ Feature: Ordering Pizza and Beverages on Domino's Website
     And I click "Check out" button
 
 
-#news
+
+
+
 
 
 

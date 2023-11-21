@@ -8,7 +8,10 @@ import com.pom.Veg_pizza_pom;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.opentelemetry.sdk.metrics.internal.concurrent.DoubleAdder;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.time.Duration;
@@ -40,34 +43,29 @@ public class Stepdef extends Base_class {
 
 
     @And("I enter my address and select the first suggestion")
-    public void iEnterMyAddressAndSelectTheFirstSuggestion() {
+    public void iEnterMyAddressAndSelectTheFirstSuggestion() throws InterruptedException {
             driver.findElement(pom.Address).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-//        click(pom.getDontallowbtn());
-
-
-        driver.findElement(pom.Dontallowbtn).click();
-
-        driver.findElement(pom.EnterArea).sendKeys("600049");
-        driver.findElement(pom.pincode).click();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            driver.findElement(pom.Dontallowbtn).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        //sendkeys(pom.getAddress(), "Chrompet");
-//        Towait(driver, 3);
-//        click(pom.getDontallowbtn());
-//        click(pom.getLocatebtn());
+        driver.findElement(pom.EnterArea).sendKeys("600049");
+
+        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.findElement(pom.pincode).click();
+
     }
 
     @And("I click the {string} menu")
     public void iClickTheMenu(String arg0) {
-//        click(pom.getVegPizza());
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+//      driver.findElement(pom.suggestion).click();
         driver.findElement(vp.VegPizza).click();
-
-
         driver.findElement(vp.AddtocartMargarita).click();
         driver.findElement(vp.Nothanks).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//        scroll(driver, pom.Paneer);
         driver.findElement(vp.AddtocartPaneer).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(bp.Quantity1).click();
@@ -78,7 +76,7 @@ public class Stepdef extends Base_class {
     public void iClickTheMenuInTheCurrentPage(String arg0)  {
         driver.findElement(bp.Beverages).click();
         driver.findElement(bp.pepsi).click();
-//        scroll(driver,pom.Scrollpanner);
+
         scroll(driver,driver.findElement(vp.Scrollpanner));
 
         for (int i= 0; i< 11; i++){
@@ -113,9 +111,26 @@ public class Stepdef extends Base_class {
     public void iClickButton(String arg0) {
     driver.findElement(pom.Checkout).click();
 
+
+        String SUBTOTAL = driver.findElement(pom.subtotal).getText();
+        System.out.println(SUBTOTAL);
+        double SubTotal = Double.parseDouble(SUBTOTAL);
+        String tax = driver.findElement(pom.Tax).getText();
+        double TaxValue = Double.parseDouble(tax);
+        System.out.println(TaxValue);
+
+
+          double totalvalue  = Double.parseDouble(String.valueOf(SubTotal+ TaxValue));
+        System.out.println("Total Value:"+totalvalue);
+
+        String gtotal = driver.findElement(pom.grandTotal).getText();
+        double GRANDTOTAL = Double.parseDouble(gtotal);
+
+Assert.assertEquals(totalvalue,GRANDTOTAL);
+
+
 //    driver.close();
 
-    //    Assert.assertEquals();
 
 
 
